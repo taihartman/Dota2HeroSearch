@@ -1,0 +1,43 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+#mobileDeviceDiv{
+    background-color: #374354;
+}
+.backButton{
+    flex-grow: 0; 
+    flex-basis: 0;
+    cursor: pointer;
+}
+.title{
+    flex-grow: 4; 
+    flex-basis: auto;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.heroName{
+    text-shadow: 0 .3vw .4vw #374354;
+}
+.heroItem{
+    font-weight: bold;
+    font-size: 2vw;
+    color: #374354;
+    background-color: #2D7C72;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 50%;
+    height: 10%;
+}
+.heroImage{
+    width: 40%; 
+    height: 6vw;
+    margin: 1vw; 
+    border-radius: 13px;
+}

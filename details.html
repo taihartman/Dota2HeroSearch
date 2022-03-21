@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <meta charset="utf-8">
+        <title>
+        Heroes
+        </title>
+        <link rel="stylesheet" href="details_style.css">
+        <script>
+            function getData(){
+                var http = new XMLHttpRequest();           // Create the object
+                http.open( "GET", "https://api.opendota.com/api/heroes", true );   // Set up the request. Arguments are: GET/POST, file, true if asynchronous
+                http.onreadystatechange = parseData;     // Callback function that is called when the response is received
+                http.send( null );                         // Start the process (send null for GETs; data for POSTs)
+
+                function parseData() {
+                    if ( http.readyState == 4 ) {            // Make sure the response is complete (all done)
+                        if ( http.status == 200 ) {            // Make sure the response is good (a valid page)
+                            console.log( http.responseText );
+                        }
+                    }
+                }
+            }
+            getData();
+            function back(){
+                history.back()
+            }
+        </script>
+
+    </head>
+
+    <body >
+        <div id="mobileDeviceDiv" style="border-style: solid; margin: auto; width: 50%; height: 100%;">
+
+            <div class="header">
+                <span style="color: #3BAE97; font-size: 1vw; margin:1vw;" class="backButton" onclick="back()">Back</span> 
+                <h1 style="text-align: center; color: #3BAE97; font-size: 2vw;" class="title">Heroes</h1>
+            </div>
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; align-items: center;"> 
+                <div class="heroItem">
+                    <img src="./images/abaddon.png"  class="heroImage"/>
+                    <span class="heroName">Abbadon</span>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
