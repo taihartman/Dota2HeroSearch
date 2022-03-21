@@ -22,7 +22,7 @@
                 }
                 console.log("Making data call")
                 var http = new XMLHttpRequest();           // Create the object
-                http.open( "GET", "https://api.opendota.com/api/heroes", true );   // Set up the request. Arguments are: GET/POST, file, true if asynchronous
+                http.open( "GET", "https://api.opendota.com/api/heroes", false );   // Set up the request. Arguments are: GET/POST, file, true if asynchronous
                 http.onreadystatechange = parseData;     // Callback function that is called when the response is received
                 http.send( null );                         // Start the process (send null for GETs; data for POSTs)
 
@@ -75,19 +75,8 @@
                 var heroName = item.getElementsByTagName('span')[0].innerText;
                 console.log(heroName);
                 window.localStorage.setItem('clickedHero',heroName);
-                window.location.href = "details.html";
+                window.location.href = "menu.html";
             }
-
-            var getHero = function(tagName) {
-                var i = null;
-                for (i = 0; tags.length > i; i += 1) {
-                    if (tags[i].tagName === tagName) {
-                        return true;
-                    }
-                }
-                
-                return false;
-            };
             function onLoad(){
 
                 if(window.localStorage.getItem('jsonData')===null){

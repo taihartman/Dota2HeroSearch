@@ -14,7 +14,7 @@ body{
     
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1100px) {
     #mainImage {
         width: 70%;
     }
@@ -22,5 +22,6 @@ body{
 @media screen and (min-width: 1500px) {
     #mainImage {
         width: 50%;
+        display: block; margin: auto; border-radius: 18px; width:20%; height: auto;
     }
   }

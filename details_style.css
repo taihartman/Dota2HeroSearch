@@ -7,11 +7,26 @@ html,body{
 }
 body{
     min-height: 100%;
+    background-color: #374354;
 
 }
+
 h1{
     text-shadow: 0 .3vw 1em #3BAE97;
 
+}
+h2{
+    font-size: 3em;
+    color: #374354;
+    text-shadow: 0 .3vw .4em #374354;
+    font-weight: bold;
+    width: 100%;
+}
+span{
+    color: #374354;
+    font-size: 2.8em;
+    width: 100%;
+   
 }
 #mobileDeviceDiv{
     background-color: #374354;
@@ -32,24 +47,9 @@ h1{
     justify-content: center;
 }
 
-.heroItem{
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 3em;
-    color: #374354;
-    background-color: #2D7C72;
-    border-radius: 22px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    width: 50%;
-    height: 10%;
-    text-shadow: 0 .3vw .4em #374354;
-}
 .heroImage{
     width: 40%; 
     height: auto;
-    margin: 1vw; 
+    margin: auto; 
     border-radius: 13px;
 }

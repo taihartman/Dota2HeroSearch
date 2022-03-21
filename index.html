@@ -21,7 +21,11 @@
     <body >
         <div id="mobileDeviceDiv" style="display: flex; flex-direction: column; margin: auto; width: 100%; height: 100%;">
             <h1 style="text-align: center; color: #3BAE97; font-size: 5em; ">Dota 2 Hero Search</h1>
-            <img src="./images/menu_image.jpg" width="80%" height="auto" style=" display: block; margin: auto; border-radius: 18px;" id="mainImage"/>
+            <picture >
+                <source srcset="./images/largeMenuImage.jpg" media="(min-width: 1500px)" />
+                <img src="./images/menu_image.jpg" width="80%" height="auto" style="display: block; margin: auto; border-radius: 18px;" id="mainImage"/>
+
+            </picture>
             <button style="flex-grow: 0; cursor: pointer; width: 80%; height: auto; border-radius: 13px; display: block; margin: auto; background-color: #8E9FB1; color: #374354; margin-top:1em; font-size: 4em;" onclick="openNewWindow()">Start</button>
         </div>
     </body>

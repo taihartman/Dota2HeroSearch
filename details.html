@@ -6,7 +6,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <meta charset="utf-8">
         <title>
-        Heroes
+            
         </title>
         <link rel="stylesheet" href="details_style.css">
         <script>
@@ -16,7 +16,7 @@
                         if ( http.status == 200 ) {     
                             console.log("Retrieve success");
                             window.localStorage.setItem('jsonData',http.responseText);
-                            buildItems(JSON.parse(http.responseText));
+                            showHeroDetails(JSON.parse(window.localStorage.getItem(http.responseText)))
                         }
                     }
                 }
@@ -30,72 +30,97 @@
             
             function back(){
                 history.back()
-            }
-
-            //creating default hero card item
-            function createHeroItem(hero){
-                var heroName = hero.localized_name;
-
-
-                //div for the item
-                var heroItem = document.createElement('div');
-                heroItem.setAttribute('style','display: flex; flex-direction: row; align-items: center; justify-content: left; align-items: center; margin-top:1em; ')
-                heroItem.setAttribute("class","heroItem");
-                heroItem.setAttribute("onclick","openDetails(this)");
-                //img of the hero based off the heroname
-                var heroImage = document.createElement('img');
-                heroImage.setAttribute("class","heroImage");
-                heroImage.setAttribute('src',`./images/${heroName}.png` );
                 
-
-                //Hero name text
-                var heroNameText = document.createElement('span');
-                heroNameText.appendChild(document.createTextNode(heroName));
-                heroNameText.setAttribute("class","heroName");
-
-                //adding the content to the card
-                heroItem.appendChild(heroImage);
-                heroItem.appendChild(heroNameText);
-
-                //adding to the div holding the items
-                document.getElementById('heroItems').appendChild(heroItem);
             }
 
-            function buildItems(responseJson){
-                //get them all 
-                // for(var i=0; i<Object.keys(responseJson).length; i++){
-                //     createHeroItem(responseJson[i]);
-                // }
-                //get 10
-                for(var i=0; i<=10; i++){
-                    createHeroItem(responseJson[i]);
+            //showing the details of the hero on screen
+            function showHeroDetails(heroes){
+                if(window.localStorage.getItem('clickedHero')===null){
+                    document.getElementsByTagName('h1')[0].innerText = "No hero selected";
+                    var nullHeader = document.createElement('h2');
+                    nullHeader.appendChild(document.createTextNode("No hero selected. Please go back and select a hero."));
+                    document.getElementById("heroDetails").appendChild(nullHeader);
+                }else{ 
+                    document.getElementsByTagName('h1')[0].innerText = window.localStorage.getItem('clickedHero');
+                    var specificHero = getHero(heroes); //getting instance of specific hero
+                    document.title= specificHero.localized_name;
+
+                    console.log(specificHero);  
+
+                    //setting up the hero image
+                    var picture = document.createElement('picture');
+                    var source = document.createElement('source');
+                    source.setAttribute("srcset",`./images/${specificHero.localized_name}Large.png`);
+                    source.setAttribute("media","(min-width: 1000px)")
+                    var heroImage = document.createElement('img');
+                    heroImage.setAttribute("class","heroImage");
+                    heroImage.setAttribute("style","display:block;");
+                    heroImage.setAttribute('src',`./images/${specificHero.localized_name}.png` );
+                    picture.appendChild(source);
+                    picture.appendChild(heroImage);
+
+                    document.getElementById('mobileDeviceDiv').insertBefore(picture,document.getElementById('heroDetails'));
+
+                    //primary attribute things
+                    var primaryAttrHeader = document.createElement('h2');
+                    primaryAttrHeader.appendChild(document.createTextNode("Primary Attribute"));
+
+                    var primaryAttr = document.createElement('span');
+                    primaryAttr.appendChild(document.createTextNode(specificHero.primary_attr));
+                    
+                    document.getElementById("heroDetails").appendChild(primaryAttrHeader);
+                    document.getElementById("heroDetails").appendChild(primaryAttr);
+                
+                    //attack type
+                    var attackTypeHeader = document.createElement('h2');
+                    attackTypeHeader.appendChild(document.createTextNode("Attack Type"));
+                    
+                    var attackType = document.createElement('span');
+                    attackType.appendChild(document.createTextNode(specificHero.attack_type));
+                    
+                    document.getElementById("heroDetails").appendChild(attackTypeHeader);
+                    document.getElementById("heroDetails").appendChild(attackType);
+
+                    //roles
+                    var rolesHeader = document.createElement('h2');
+                    rolesHeader.appendChild(document.createTextNode("Roles"));
+                    document.getElementById("heroDetails").appendChild(rolesHeader);
+                    //role could have many values so looping through here
+                    for(var i=0; i<specificHero.roles.length;i++){
+                        var role = document.createElement('span');
+                        role.appendChild(document.createTextNode(specificHero.roles[i]));
+                        document.getElementById("heroDetails").appendChild(role);
+                    }
+                    
+                    //legs
+                    var legsHeader = document.createElement('h2');
+                    legsHeader.appendChild(document.createTextNode("Legs"));
+                    
+                    var legs = document.createElement('span');
+                    legs.appendChild(document.createTextNode(specificHero.legs));
+                    
+                    document.getElementById("heroDetails").appendChild(legsHeader);
+                    document.getElementById("heroDetails").appendChild(legs);
+                       
                 }
-                // var elements = document.getElementsByClassName('heroItem');
-                // for (var i = 0; i < elements.length; i++) {
-                //     elements[i].addEventListener('click', function(item) {
-                //         openDetails(item);
-                //     });
-                // }
             }
-            function openDetails(item){
-                console.log('clicked');
-                console.log(item);
-                var heroName = item.getElementsByTagName('span')[0].innerText;
-                console.log(heroName);
-                window.localStorage.setItem('clickedHero',heroName);
-            }
+
+            var getHero = function(heroes) {
+                var i = null;
+                for (i = 0; heroes.length > i; i += 1) {
+                    if (heroes[i].localized_name === window.localStorage.getItem('clickedHero')) {
+                        return heroes[i];
+                    }
+                }
+                
+                return false;
+            };
             function onLoad(){
-
                 if(window.localStorage.getItem('jsonData')===null){
-                    console.log("Data call");
                     getData();
-
                 }else{
-                    console.log("Local storage");
-                    console.log(window.localStorage.getItem('jsonData'));
-                    buildItems(JSON.parse(window.localStorage.getItem('jsonData')));
+                    showHeroDetails(JSON.parse(window.localStorage.getItem('jsonData')));
                 }
-
             }
             
             
@@ -108,10 +133,12 @@
 
             <div class="header">
                 <span style="color: #3BAE97; font-size: 5em; margin-left:.5em; margin-top:.5em;" class="backButton" onclick="back()">< </span> 
-                <h1 style="text-align: center; color: #3BAE97; font-size: 5em; " class="title">Heroes</h1>
+                <h1 style="text-align: center; color: #3BAE97; font-size: 5em; " class="title"></h1>
             </div>
-            <div id="heroItems" style="display: flex; flex-direction: column; align-items: center; justify-content: center; align-items: center; overflow: auto; background-color: #374354; "> 
-               
+
+            <div id="heroDetails" style="display: flex; flex-direction: column; align-items: flex-start; margin: auto; justify-content: left; width: 80%; height: auto; overflow: auto; background-color: #8e9FB1; border-radius: 22px; padding: 2em; margin-top: 3em; margin-bottom: 3em;"> 
+                
+                
             </div>
         </div>
     </body>
