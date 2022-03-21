@@ -46,16 +46,17 @@
                     document.title= specificHero.localized_name;
 
                     console.log(specificHero);  
+                    console.log(specificHero.localized_name.toLowerCase());  
 
                     //setting up the hero image
                     var picture = document.createElement('picture');
                     var source = document.createElement('source');
-                    source.setAttribute("srcset",`./images/${specificHero.localized_name}Large.png`);
+                    source.setAttribute("srcset",`./images/${specificHero.localized_name.toLowerCase()}Large.png`);
                     source.setAttribute("media","(min-width: 1000px)")
                     var heroImage = document.createElement('img');
                     heroImage.setAttribute("class","heroImage");
                     heroImage.setAttribute("style","display:block;");
-                    heroImage.setAttribute('src',`./images/${specificHero.localized_name}.png` );
+                    heroImage.setAttribute('src',`./images/${specificHero.localized_name.toLowerCase()}.png` );
                     picture.appendChild(source);
                     picture.appendChild(heroImage);
 
@@ -105,6 +106,7 @@
                 }
             }
 
+            //this will loop through and find the hero the user selected
             var getHero = function(heroes) {
                 var i = null;
                 for (i = 0; heroes.length > i; i += 1) {
@@ -113,7 +115,6 @@
                     }
                 }
                 
-                return false;
             };
             function onLoad(){
                 if(window.localStorage.getItem('jsonData')===null){
