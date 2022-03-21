@@ -1,6 +1,26 @@
 *{
     font-family: 'Roboto', sans-serif;
 }
+html,body{
+    height: 100%;
+    margin: 0;
+}
+body{
+    min-height: 100%;
+
+}
 #mobileDeviceDiv{
     background-color: #374354;
+    
 }
+
+@media screen and (min-width: 1200px) {
+    #mainImage {
+        width: 70%;
+    }
+}
+@media screen and (min-width: 1500px) {
+    #mainImage {
+        width: 50%;
+    }
+  }

@@ -1,6 +1,14 @@
 *{
     font-family: 'Roboto', sans-serif;
 }
+html,body{
+    height: 100%;
+    margin: 0;
+}
+body{
+    min-height: 100%;
+
+}
 #mobileDeviceDiv{
     background-color: #374354;
 }
@@ -19,12 +27,11 @@
     align-items: center;
     justify-content: center;
 }
-.heroName{
-    text-shadow: 0 .3vw .4vw #374354;
-}
+
 .heroItem{
+    cursor: pointer;
     font-weight: bold;
-    font-size: 2vw;
+    font-size: 3em;
     color: #374354;
     background-color: #2D7C72;
     border-radius: 22px;
@@ -34,10 +41,11 @@
     justify-content: flex-start;
     width: 50%;
     height: 10%;
+    text-shadow: 0 .3vw .4em #374354;
 }
 .heroImage{
     width: 40%; 
-    height: 6vw;
+    height: auto;
     margin: 1vw; 
     border-radius: 13px;
 }
